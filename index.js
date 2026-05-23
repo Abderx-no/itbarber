@@ -1,27 +1,36 @@
-const form = document.getElementById('bookingForm');
-const statusEl = document.getElementById('formStatus');
+const form = document.getElementById('form');
+const submitBtn = form.querySelector('button[type="submit"]');
 
 form.addEventListener('submit', async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  try {
-    const response = await fetch('https://formspree.io/f/xykvjazd', {
-      method: 'POST',
-      body: new FormData(form),
-      headers: {
-        'Accept': 'application/json'
-      }
-    });
+    const formData = new FormData(form);
+    formData.append("access_key", "b0d4613d-812e-452a-8df5-01e6a6e15f73");
 
-    if (response.ok) {
-      statusEl.innerHTML = "✅ Booking sent successfully!";
-      form.reset();
-    } else {
-      statusEl.innerHTML = "❌ Failed to send.";
+    const originalText = submitBtn.textContent;
+
+    submitBtn.textContent = "Sending...";
+    submitBtn.disabled = true;
+
+    try {
+        const response = await fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            body: formData
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            alert("Success! Your message has been sent.");
+            form.reset();
+        } else {
+            alert("Error: " + data.message);
+        }
+
+    } catch (error) {
+        alert("Something went wrong. Please try again.");
+    } finally {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
     }
-
-  } catch (error) {
-    console.log(error);
-    statusEl.innerHTML = "❌ Error happened.";
-  }
 });
