@@ -11,9 +11,6 @@ form.addEventListener("submit", async (e) => {
   try {
     const response = await fetch("https://formspree.io/f/mbdbkgdw", {
       method: "POST",
-      headers: {
-        Accept: "application/json"
-      },
       body: new FormData(form)
     });
 
