@@ -9,7 +9,7 @@ form.addEventListener("submit", async (e) => {
   btn.textContent = "Processing...";
 
   try {
-    const response = await fetch("https://formspree.io/f/xykvjazd", {
+    const response = await fetch("https://formspree.io/f/mbdbkgdw", {
       method: "POST",
       headers: {
         Accept: "application/json"
