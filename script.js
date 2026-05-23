@@ -1,54 +1,52 @@
-form.addEventListener('submit', async (e) => {
+const form = document.getElementById("bookingForm");
+const statusEl = document.getElementById("formStatus");
+
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   statusEl.textContent = '';
   statusEl.className = 'form-status';
 
-  const formData = new FormData(form);
-  const data = Object.fromEntries(formData.entries());
-
-  // Safe date check
-  if (!data.date) {
-    statusEl.textContent = 'Please select a date.';
-    statusEl.classList.add('error');
-    return;
-  }
-
-  if (new Date(data.date).getDay() === 0) {
-    statusEl.textContent = 'We are closed on Sundays.';
-    statusEl.classList.add('error');
-    return;
-  }
-
-  const btn = form.querySelector('button[type="submit"]');
+  const btn = form.querySelector("button[type='submit']");
   btn.disabled = true;
-  btn.textContent = 'Processing...';
+  btn.textContent = "Processing...";
+
+  const formData = new FormData(form);
+  const date = formData.get("date");
+
+  if (date && new Date(date).getDay() === 0) {
+    statusEl.textContent = "We are closed on Sundays.";
+    statusEl.classList.add("error");
+
+    btn.disabled = false;
+    btn.textContent = "Confirm Booking";
+    return;
+  }
 
   try {
-    const response = await fetch('https://formspree.io/f/xykvjazd', {
-      method: 'POST',
+    const response = await fetch("https://formspree.io/f/xykvjazd", {
+      method: "POST",
       headers: {
-        Accept: 'application/json'
+        Accept: "application/json"
       },
-      body: new FormData(form)
+      body: formData
     });
 
-    // SAFE response handling
     if (response.ok) {
-      statusEl.textContent = '✅ Booking confirmed!';
-      statusEl.classList.add('success');
+      statusEl.textContent = "✅ Booking confirmed!";
+      statusEl.classList.add("success");
       form.reset();
     } else {
-      statusEl.textContent = '❌ Failed to send booking.';
-      statusEl.classList.add('error');
+      statusEl.textContent = "❌ Failed to send booking.";
+      statusEl.classList.add("error");
     }
 
-  } catch (error) {
-    console.error(error);
-    statusEl.textContent = '❌ Network error.';
-    statusEl.classList.add('error');
+  } catch (err) {
+    console.error(err);
+    statusEl.textContent = "❌ Network error.";
+    statusEl.classList.add("error");
   }
 
   btn.disabled = false;
-  btn.textContent = 'Confirm Booking';
+  btn.textContent = "Confirm Booking";
 });
