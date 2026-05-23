@@ -3,12 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ITbarber 🇮🇹  | Premium Cuts & Scheduling</title>
+  <title>ITbarber 🇮🇹 | Premium Cuts & Scheduling</title>
+
   <link rel="stylesheet" href="style.css">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
+
   <header>
     <div class="container nav-container">
       <a href="#" class="logo">IT<span>barber</span> 🇮🇹</a>
@@ -25,6 +28,7 @@
   </header>
 
   <main>
+
     <section id="home" class="hero">
       <div class="container hero-content">
         <h1>Sharp Cuts <br>Zero Wait</h1>
@@ -37,26 +41,31 @@
       <div class="container">
         <h2 class="section-title">Our Services</h2>
         <div class="services-grid">
+
           <div class="service-card">
             <h3>Classic Haircut</h3>
             <p>Precision cut & style</p>
             <span class="price">€15 • 30 min</span>
           </div>
+
           <div class="service-card">
             <h3>Beard Trim & Shape</h3>
             <p>Hot towel & straight razor</p>
             <span class="price">€15 • 20 min</span>
           </div>
+
           <div class="service-card">
             <h3>Full Package</h3>
             <p>Haircut + beard + wash</p>
             <span class="price">€20 • 45 min</span>
           </div>
+
           <div class="service-card">
             <h3>Kids Cut</h3>
             <p>Under 12 years old</p>
             <span class="price">€10 • 25 min</span>
           </div>
+
         </div>
       </div>
     </section>
@@ -64,15 +73,19 @@
     <section id="book" class="section booking-section">
       <div class="container">
         <h2 class="section-title">Book Your Appointment</h2>
+
         <form id="bookingForm" class="booking-form">
+
           <div class="form-group">
             <label for="name">Full Name</label>
             <input type="text" id="name" name="name" required placeholder="John Doe">
           </div>
+
           <div class="form-group">
             <label for="phone">Phone Number</label>
             <input type="tel" id="phone" name="phone" required placeholder="(555) 123-4567">
           </div>
+
           <div class="form-group">
             <label for="service">Service</label>
             <select id="service" name="service" required>
@@ -83,53 +96,64 @@
               <option value="Kids Cut">Kids Cut - €10</option>
             </select>
           </div>
+
           <div class="form-row">
             <div class="form-group">
               <label for="date">Date</label>
               <input type="date" id="date" name="date" required>
             </div>
+
             <div class="form-group">
               <label for="time">Time</label>
               <input type="time" id="time" name="time" required min="09:00" max="19:00">
             </div>
           </div>
+
           <div class="form-group">
             <label for="notes">Notes (Optional)</label>
             <textarea id="notes" name="notes" rows="3" placeholder="Any preferences or requests?"></textarea>
           </div>
+
           <button type="submit" class="btn-primary btn-block">Confirm Booking</button>
           <p id="formStatus" class="form-status" aria-live="polite"></p>
+
         </form>
       </div>
     </section>
 
     <section id="contact" class="section contact-section">
       <div class="container">
-       
+
         <div class="contact-grid">
+
           <div class="contact-info">
-            <h3>📍Location</h3>
-            <p>home service available<br>City, Messina Italy</p>
+            <h3>📍 Location</h3>
+            <p>Home service available<br>Messina, Italy</p>
+
             <h3>🕒 Hours</h3>
-            <p>saturday: 9:00 AM – 5:00 PM<br>Sunday: 9:00 AM – 5:00 PM<br>Friday: 9:00 AM – 5:00 PM</p>
+            <p>Friday - Sunday: 9:00 AM – 5:00 PM</p>
+
             <h3>📞 Contact</h3>
             <p>(+39) 987-6543<br>abderrahmanem627@gmail.com</p>
           </div>
-          <div class="map-placeholder">
-            <p><div class="map-container">
-  <iframe 
-    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d801532.7140671451!2d14.258710189673298!3d38.30296515647272!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x131686c19a9b6e5d%3A0x30b042967b68290!2sMetropolitan%20City%20of%20Messina%2C%20Italy!5e0!3m2!1sen!2sdz!4v1779482597778!5m2!1sen!2sdz" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">  width="100%" 
-           width="100%" 
-          height="100%" 
-          style="border:0; border-radius: 12px;" 
-          allowfullscreen="" 
-          loading="lazy">
-  </iframe>
-</div></p>
+
+          <div class="map-container">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d801532.7140671451!2d14.258710189673298!3d38.30296515647272!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x131686c19a9b6e5d%3A0x30b042967b68290!2sMetropolitan%20City%20of%20Messina%2C%20Italy!5e0!3m2!1sen!2sdz!4v1779482597778!5m2!1sen!2sdz"
+              width="100%"
+              height="350"
+              style="border:0; border-radius:12px;"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
           </div>
+
         </div>
+
       </div>
     </section>
+
   </main>
 
   <footer>
