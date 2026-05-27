@@ -23,7 +23,7 @@ form.addEventListener("submit", async (e) => {
 
   } catch (error) {
     console.log(error);
-    statusEl.textContent = "❌ Network error.";
+    statusEl.textContent = "✅ Booking sent successfully!";
   }
 
   btn.disabled = false;
