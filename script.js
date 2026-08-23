@@ -1,3 +1,25 @@
+// MOBILE MENU
+const mobileMenuBtn = document.querySelector(".mobile-menu-btn");
+const nav = document.querySelector("nav");
+
+mobileMenuBtn.addEventListener("click", () => {
+  nav.classList.toggle("active");
+
+  if (nav.classList.contains("active")) {
+    mobileMenuBtn.textContent = "✕";
+  } else {
+    mobileMenuBtn.textContent = "☰";
+  }
+});
+
+// Close menu when clicking a link
+document.querySelectorAll("nav a").forEach(link => {
+  link.addEventListener("click", () => {
+    nav.classList.remove("active");
+    mobileMenuBtn.textContent = "☰";
+  });
+});
+
 const form = document.getElementById("bookingForm");
 const statusEl = document.getElementById("formStatus");
 
