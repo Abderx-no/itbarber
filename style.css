@@ -60,63 +60,57 @@ body {
 
 
 /* ========================================
-   ANIMATED ELECTRIC BACKGROUND - MOBILE FIXED
+   ANIMATED ELECTRIC BACKGROUND - MOBILE FIXED V2
 ======================================== */
 
 body::before {
   content: "";
   position: fixed;
-  top: -30%;
+  top: 0;
   left: -100%;
-  width: 80%;
-  height: 160%;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
   z-index: 0;
   background:
     linear-gradient(
       110deg,
       transparent 35%,
-      rgba(30, 95, 168, 0.02) 40%,
-      rgba(59, 130, 196, 0.16) 45%,
-      rgba(100, 180, 255, 0.10) 47%,
-      rgba(59, 130, 196, 0.04) 50%,
+      rgba(30, 95, 168, 0.08) 40%,
+      rgba(59, 130, 196, 0.25) 45%,
+      rgba(100, 180, 255, 0.15) 47%,
+      rgba(59, 130, 196, 0.08) 50%,
       transparent 55%
     );
   filter: blur(5px);
-  transform: rotate(-12deg);
   animation: electricBeam 9s linear infinite;
-  
-  /* Mobile optimization */
   will-change: transform;
   backface-visibility: hidden;
-  -webkit-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0) rotate(-12deg);
+  -webkit-backface-visibility: hidden;
 }
 
 
 body::after {
   content: "";
   position: fixed;
-  width: 500px;
-  height: 500px;
-  top: 20%;
-  left: -500px;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
   pointer-events: none;
   z-index: 0;
   background:
     radial-gradient(
-      circle,
-      rgba(59, 130, 196, 0.13) 0%,
-      rgba(30, 95, 168, 0.06) 35%,
+      circle at 50% 50%,
+      rgba(59, 130, 196, 0.2) 0%,
+      rgba(30, 95, 168, 0.1) 35%,
       transparent 70%
     );
   filter: blur(35px);
   animation: blueEnergy 12s ease-in-out infinite;
-  
-  /* Mobile optimization */
   will-change: transform;
   backface-visibility: hidden;
-  -webkit-transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
 }
 
 
@@ -129,14 +123,14 @@ body::after {
     opacity: 1;
   }
   50% {
-    left: 60%;
-    opacity: 0.8;
+    left: 50%;
+    opacity: 0.9;
   }
-  75% {
+  85% {
     opacity: 1;
   }
   100% {
-    left: 130%;
+    left: 150%;
     opacity: 0;
   }
 }
@@ -144,26 +138,42 @@ body::after {
 
 @keyframes blueEnergy {
   0% {
-    left: -500px;
-    top: 20%;
-    opacity: 0;
+    opacity: 0.3;
   }
   20% {
-    opacity: 1;
-  }
-  50% {
-    left: 45%;
-    top: 45%;
     opacity: 0.7;
   }
+  50% {
+    opacity: 0.8;
+  }
   80% {
-    left: 90%;
-    top: 20%;
-    opacity: 0.4;
+    opacity: 0.5;
   }
   100% {
-    left: 120%;
-    opacity: 0;
+    opacity: 0.3;
+  }
+}
+
+
+/* IMPORTANT: This keeps waves visible on mobile */
+@media (max-width: 768px) {
+  body::before {
+    opacity: 0.9;
+    width: 150%;
+    background:
+      linear-gradient(
+        110deg,
+        transparent 35%,
+        rgba(30, 95, 168, 0.12) 40%,
+        rgba(59, 130, 196, 0.35) 45%,
+        rgba(100, 180, 255, 0.25) 47%,
+        rgba(59, 130, 196, 0.12) 50%,
+        transparent 55%
+      );
+  }
+  
+  body::after {
+    opacity: 0.8;
   }
 }
 
