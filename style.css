@@ -60,24 +60,18 @@ body {
 
 
 /* ========================================
-   ANIMATED ELECTRIC BACKGROUND
+   ANIMATED ELECTRIC BACKGROUND - MOBILE FIXED
 ======================================== */
 
 body::before {
   content: "";
-
   position: fixed;
-
   top: -30%;
   left: -100%;
-
   width: 80%;
   height: 160%;
-
   pointer-events: none;
-
   z-index: 0;
-
   background:
     linear-gradient(
       110deg,
@@ -88,30 +82,27 @@ body::before {
       rgba(59, 130, 196, 0.04) 50%,
       transparent 55%
     );
-
   filter: blur(5px);
-
   transform: rotate(-12deg);
-
   animation: electricBeam 9s linear infinite;
+  
+  /* Mobile optimization */
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0) rotate(-12deg);
 }
 
 
 body::after {
   content: "";
-
   position: fixed;
-
   width: 500px;
   height: 500px;
-
   top: 20%;
   left: -500px;
-
   pointer-events: none;
-
   z-index: 0;
-
   background:
     radial-gradient(
       circle,
@@ -119,33 +110,31 @@ body::after {
       rgba(30, 95, 168, 0.06) 35%,
       transparent 70%
     );
-
   filter: blur(35px);
-
   animation: blueEnergy 12s ease-in-out infinite;
+  
+  /* Mobile optimization */
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-transform: translate3d(0, 0, 0);
 }
 
 
 @keyframes electricBeam {
-
   0% {
     left: -100%;
     opacity: 0;
   }
-
   15% {
     opacity: 1;
   }
-
   50% {
     left: 60%;
     opacity: 0.8;
   }
-
   75% {
     opacity: 1;
   }
-
   100% {
     left: 130%;
     opacity: 0;
@@ -154,29 +143,24 @@ body::after {
 
 
 @keyframes blueEnergy {
-
   0% {
     left: -500px;
     top: 20%;
     opacity: 0;
   }
-
   20% {
     opacity: 1;
   }
-
   50% {
     left: 45%;
     top: 45%;
     opacity: 0.7;
   }
-
   80% {
     left: 90%;
     top: 20%;
     opacity: 0.4;
   }
-
   100% {
     left: 120%;
     opacity: 0;
@@ -1207,6 +1191,15 @@ footer a:hover {
 
   .logo {
     font-size: 1.7rem;
+  }
+  
+  /* Reduce opacity of background animations on mobile for better performance */
+  body::before {
+    opacity: 0.6;
+  }
+  
+  body::after {
+    opacity: 0.5;
   }
 }
 
