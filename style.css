@@ -157,26 +157,72 @@ body::after {
 
 /* IMPORTANT: This keeps waves visible on mobile */
 @media (max-width: 768px) {
-  body::before {
-    opacity: 0.9;
-    width: 150%;
-    background:
-      linear-gradient(
-        110deg,
-        transparent 35%,
-        rgba(30, 95, 168, 0.12) 40%,
-        rgba(59, 130, 196, 0.35) 45%,
-        rgba(100, 180, 255, 0.25) 47%,
-        rgba(59, 130, 196, 0.12) 50%,
-        transparent 55%
-      );
+
+  .mobile-menu-btn {
+    display: block;
   }
-  
+
+  nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #08182b;
+    padding: 1.5rem;
+    border-bottom: 2px solid var(--accent);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  }
+
+  nav.active {
+    display: block;
+    animation: fadeInUp 0.3s ease;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .hero h1 {
+    font-size: 2.8rem;
+  }
+
+  .hero p {
+    font-size: 1.05rem;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .section {
+    padding: 4rem 0;
+  }
+
+  .booking-form {
+    padding: 2rem 1.5rem;
+  }
+
+  .logo {
+    font-size: 1.7rem;
+  }
+
+  /* ELECTRICITY EFFECT — MOBILE */
+  body::before {
+    opacity: 1 !important;
+    width: 180%;
+    filter: blur(3px);
+    animation-duration: 6s;
+  }
+
   body::after {
-    opacity: 0.8;
+    opacity: 0.9 !important;
+    filter: blur(25px);
+    animation-duration: 8s;
   }
 }
-
 
 /* Keep website content above animation */
 
