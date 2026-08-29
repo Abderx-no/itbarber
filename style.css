@@ -366,26 +366,31 @@ footer {
    LIGHT BLACK SCROLLBAR — TWITTER/X STYLE
 ======================================== */
 
+/* Chrome, Edge, Safari, Opera */
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 6px;
 }
 
+/* Dark track */
 ::-webkit-scrollbar-track {
-  background: #ededed;;
+  background: #050b14;
 }
 
+/* Scroll thumb */
 ::-webkit-scrollbar-thumb {
-  background: rgba(243, 243, 243, );
+  background: #3a414a;
   border-radius: 999px;
 }
 
+/* When mouse is over scrollbar */
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, );
+  background: #555e68;
 }
 
+/* Firefox */
 html {
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255,  255, ) #050b14;
+  scrollbar-color: #3a414a #050b14;
 }
 /* ========================================
    GENERAL
