@@ -1,53 +1,60 @@
-// MOBILE MENU
-const mobileMenuBtn = document.querySelector(".mobile-menu-btn");
-const nav = document.querySelector("nav");
+require('dotenv').config();
 
-mobileMenuBtn.addEventListener("click", () => {
-  nav.classList.toggle("active");
+const express = require('express');
+const gcal = require('./Utility/gcal.js');
+const days = require('./ReqHandlers/GET-Handlers/days.js');
+const timeslots = require('./ReqHandlers/GET-Handlers/timeslots.js');
+const book = require('./ReqHandlers/POST-Handlers/book.js');
 
-  if (nav.classList.contains("active")) {
-    mobileMenuBtn.textContent = "✕";
-  } else {
-    mobileMenuBtn.textContent = "☰";
-  }
-});
+const PORT = Number(process.env.PORT) || 8080;
 
-// Close menu when clicking a link
-document.querySelectorAll("nav a").forEach(link => {
-  link.addEventListener("click", () => {
-    nav.classList.remove("active");
-    mobileMenuBtn.textContent = "☰";
-  });
-});
+function sendResult(res, data) {
+    const status = data && data.success === false ? 400 : 200;
+    res.status(status).json(data);
+}
 
-const form = document.getElementById("bookingForm");
-const statusEl = document.getElementById("formStatus");
+function wrap(handler) {
+    return (req, res, next) => Promise.resolve(handler(req, res)).catch(next);
+}
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
+async function main() {
+    const auth = await gcal.initAuthorize();
 
-  const btn = form.querySelector("button[type='submit']");
-  btn.disabled = true;
-  btn.textContent = "Processing...";
+    const app = express();
+    app.use(express.json());
 
-  try {
-    const response = await fetch("https://formspree.io/f/mbdbkgdw", {
-      method: "POST",
-      body: new FormData(form)
+    app.get('/days', wrap(async (req, res) => {
+        const data = await days.getBookableDays(auth, req.query.year, req.query.month);
+        sendResult(res, data);
+    }));
+
+    app.get('/timeslots', wrap(async (req, res) => {
+        const data = await timeslots.getAvailTimeslots(
+            auth, req.query.year, req.query.month, req.query.day
+        );
+        sendResult(res, data);
+    }));
+
+    app.post('/book', wrap(async (req, res) => {
+        const data = await book.bookAppointment(
+            auth,
+            req.query.year, req.query.month, req.query.day,
+            req.query.hour, req.query.minute
+        );
+        sendResult(res, data);
+    }));
+
+    app.use((err, _req, res, _next) => {
+        console.error(err);
+        res.status(500).json({success: false, message: err.message || 'Internal server error'});
     });
 
-    if (response.ok) {
-      statusEl.textContent = "✅ Booking sent successfully!";
-      form.reset();
-    } else {
-      statusEl.textContent = "❌ Failed to send booking.";
-    }
+    app.listen(PORT, () => {
+        console.log(`Server is now running on port ${PORT}... Ctrl+C to end`);
+    });
+}
 
-  } catch (error) {
-    console.log(error);
-    statusEl.textContent = "✅ Booking sent successfully!";
-  }
-
-  btn.disabled = false;
-  btn.textContent = "Confirm Booking";
+main().catch((err) => {
+    console.error(err);
+    process.exit(1);
 });
